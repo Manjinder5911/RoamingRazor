@@ -1,0 +1,37 @@
+﻿body {
+}
+
+.cardContainer {
+    /*    border: 2px solid black;*/
+    border-radius: 15px;
+    margin: 10px;
+    background: #eeeeee !important;
+}
+    
+
+
+.cardLink {
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+    color: black;
+    text-decoration: none;
+}
+    .cardLink:hover {
+        background: #e3e3e3;
+        color: black;
+    }
+   
+
+.cardImg {
+    margin: 5px;
+    width: 300px;
+    height: 160px;
+    border-radius: 10px;
+}
+.cardRating, .cardHeading {
+    margin: 2px 7px;
+}
+.cardHeading {
+    font-size: 1.2rem;
+}

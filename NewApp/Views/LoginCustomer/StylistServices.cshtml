@@ -1,0 +1,35 @@
+﻿ @model NewApp.Models.StylistServiceList
+@{
+    Layout = "~/Views/Shared/_LayoutLoginCustomer.cshtml";
+}
+
+
+<main>
+    <section>
+        <div class="mt-3 container body-content" style="border-bottom: 1px solid #eeeeee;">
+            <img src="@Model.backgroundImg" class="backgroundImage" />
+            <div style=" display: flex; align-items: center; margin: 24px 0px;">
+                <h1 style="">@Model.stylistName</h1>
+                <div style="margin: 10px 72px;">@Model.rating<span>&nbsp;&bigstar;</span></div>
+            </div>
+            
+            <div style=" margin: 15px 0px;">
+                <h3>Services</h3>
+                @foreach (var element in Model.ListOfServices)
+                {
+                    <div class="serviceList" style="margin: 5px 0px; border-bottom: 1px solid #eeeeee; ">
+                        <div class="serviceDetails" style="display: flex; width: 30vw; justify-content: space-between; padding: 3px 0px; align-items: center;">
+                            <h6 class="serviceName">@element.ServiceName</h6>
+                            <span class="ServicePrice">@element.Price</span>
+                            <button type="submit" value="@element.ServiceID,@Model.stylistID,@Model.stylistName,@element.ServiceName,@element.Price" class="btn btn-secondary addToCartBtn btnHover" style="background: transparent; border-radius: 30px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20h44v44c0 11 9 20 20 20s20-9 20-20V180h44c11 0 20-9 20-20s-9-20-20-20H356V96c0-11-9-20-20-20s-20 9-20 20v44H272c-11 0-20 9-20 20z" /></svg>
+                            </button>
+                        </div>
+                        <div class="description">@element.Description</div>
+                    </div>
+                }
+                </div>
+        </div>
+    </section>
+
+</main>

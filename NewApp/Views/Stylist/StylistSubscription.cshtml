@@ -1,0 +1,38 @@
+﻿@*@{
+    Layout = null;
+}
+@if (@Session["uname"].ToString() == null)
+{
+    Response.Redirect("~/Views/Home/Index.cshtml");
+}
+else
+{*@
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title></title>
+    </head>
+    <body>
+        <div style="width:80%;margin:20px auto;">
+
+            @*<div class="text-center d-none" style="padding:10px; background:#eeeeee;font-weight:bold;display:@ViewBag.paymentStatusStylistDisplay;">
+                    @ViewBag.SuccessStylistReference
+                </div>*@
+
+            <h1>Please pay for the Subscription Amount</h1>
+            <div>
+                <h4>Subtotal:&nbsp;$9.99</h4>
+                <h4>Taxes:&nbsp;$1.2</h4>
+                <form action="@Url.Content("../Paypal/PaymentWithPaypal")" method="post">
+                    <input type="text" name="paymentkey" value="stylist" hidden />
+                    <input type="text" name="totalPrice" value="11.19" hidden />
+                    <input type="text" name="stylistId" value="@Session["styistId"].ToString()" hidden />
+                    <button type="submit" class="btn btn-secondary">Buy Subscription</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+@*}*@

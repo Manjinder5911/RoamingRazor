@@ -1,0 +1,388 @@
+﻿body {
+}
+.navAddressContainer {
+    border-radius: 15px;
+    background: #EEEEEE;
+    padding: 6px 10px;
+}
+
+.navCustomerInputs {
+    background: transparent;
+    outline: none;
+    border: none;
+    padding: 5px 7px;
+    margin: 0px 5px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.searchStylistContainer {
+    background: #EEEEEE;
+    margin: 5px 10px;
+    border-radius: 15px;
+    padding: 6px 10px;
+    width: 35vw;
+    display:flex;
+    align-items:center;
+}
+
+.navSearchInput {
+    background: transparent;
+    outline: none;
+    border: none;
+    padding: 5px 7px;
+    font-size: 1rem;
+    font-weight: 600;
+/*    max-width: unset;*/
+    width: 34vw !important;
+}
+/*.navSearchInput::-webkit-search-cancel-button{
+    color:white;
+    background:grey;
+    border-radius:5px;
+}*/
+
+#btnToggleCustomer {
+    background: #EEEEEE;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+#btnToggleCustomer:hover {
+       background: #E2E2E2;
+    }
+
+.customerCart {
+    filter: invert(1);
+    margin: 7px;
+    width: 22px;
+    height: 22px;
+}
+
+.numberOfCarts {
+    display:flex;
+    margin: 4px 7px;
+    color: white;
+    font-size: 1rem;
+}
+
+/*customer profile css*/
+#customerProfileContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+   background: rgba(38, 38, 38, 0.8);
+}
+
+#customerCartDisplay{
+    position:fixed;
+    top:0;
+    right:0;
+    overflow-y:scroll;
+
+}
+
+.customerInfoDisplayLayout {
+    position: absolute;
+    background: white;
+    border-left: 2px solid #eeeeee;
+    top: 0;
+    display: none;
+    width: 40vw;
+    padding-bottom: 20px;
+}
+
+.btnDisplayContainer {
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    width: 91%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
+
+#btnCustomerSignOut {
+    color:red;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+/*    width: 91%;*/
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
+.btnDisplayContainer:hover,#btnCustomerSignOut:hover{
+    background:#eeeeee;
+}
+
+.accountInfoSubContainer {
+    width: 60%;
+    margin: 20px auto;
+}
+
+#telCustomerChange{
+    outline:none;
+    border-radius:5px;
+
+}
+
+/*credit card css*/
+.cardSubContainer {
+    width: 80%;
+    text-align: center;
+    margin: 20px auto;
+    margin-top: 40px;
+    cursor: pointer;
+/*    background: #eeeeee;*/
+    padding: 10px;
+    border-radius: 5px;
+}
+.credit-card {
+    display:none;
+    width: 360px;
+    height: 400px;
+    margin: 20px auto 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 1px 2px 3px 0 rgba(0,0,0,.10);
+}
+.form-header {
+    height: 60px;
+    padding: 20px 30px 0;
+    border-bottom: 1px solid #e1e8ee;
+}
+
+.form-body {
+    height: 340px;
+    padding: 30px 30px 20px;
+}
+.title {
+    font-size: 18px;
+    margin: 0;
+    color: #5e6977;
+}
+
+/* Common */
+.card-number,
+.cvv-input input,
+.month select,
+.year select {
+    font-size: 14px;
+    font-weight: 100;
+/*    line-height: 14px;*/
+}
+
+.card-number,
+.month select,
+.year select {
+    font-size: 14px;
+    font-weight: 100;
+/*    line-height: 14px;*/
+}
+
+.card-number,
+.cvv-details,
+.cvv-input input,
+.month select,
+.year select {
+    opacity: .7;
+    color: #86939e;
+}
+
+/* Card Number */
+.card-number {
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+    outline:none;
+}
+
+/* Date Field */
+.month select,
+.year select {
+    width: 145px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+    background: url('caret.png') no-repeat;
+    background-position: 85% 50%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.month select {
+    float: left;
+}
+
+.year select {
+    float: right;
+}
+
+/* Card Verification Field */
+.cvv-input input {
+    float: left;
+    width: 145px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.cvv-details {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+ .cvv-details p {
+        margin-top: 6px;
+    }
+
+
+/* Buttons Section */
+.paypal-btn,
+.proceed-btn {
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    border-color: transparent;
+    border-radius: 6px;
+}
+.proceed-btn {
+    margin-bottom: 10px;
+    background: #7dc855;
+}
+
+    .paypal-btn a,
+    .proceed-btn a {
+        text-decoration: none;
+    }
+
+    .proceed-btn a {
+        color: #fff;
+    }
+
+.paypal-btn a {
+    color: rgba(242, 242, 242, .7);
+}
+
+.paypal-btn {
+    padding-right: 95px;
+    background: url('paypal-logo.svg') no-repeat 65% 56% #009cde;
+}
+
+/*cart css*/
+#customerCartContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(38, 38, 38, 0.8);
+}
+
+/*services page*/
+.backgroundImage {
+    width: 80vw; height: 55vh; margin: 5px auto;
+}
+
+/*cart css*/
+.removeServiceBtn {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 6px;
+/*    border-radius: 18px;*/
+    /*    background:transparent !important;*/
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>') !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width: 21px;
+    height: 16px;
+}
+
+.placeOrderBtn:hover {
+    background: #555555 !important;
+}
+
+.placeOrderBtn {
+    background: black;
+    color: white;
+    width:100%;
+    border-radius: 10px;
+}
+
+/*stylist css*/
+.form-check-input:checked {
+    background-color: #ff8400 !important;
+    border-color: #ff8400 !important;
+}
+
+
+.btnHover:hover {
+    background: #eeeeee !important;
+}
+
+/*
+*/
+/*admin table*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    table th, table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: black;
+    }
+
+/* CSS styles for table headers */
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* CSS styles for even rows */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* CSS styles for odd rows */
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* CSS styles for table hover effect */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* CSS styles for table borders */
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}

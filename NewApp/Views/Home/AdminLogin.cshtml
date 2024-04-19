@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/css/layout.css" />
+</head>
+<body>
+    <div style="width: 80%; margin: 20px auto; display: flex; align-items: center; height: 90vh;">
+        <div style="display: flex; align-items: center; flex-direction: column; width: 30vw; margin: 10px auto; background: #eeeeee; height: 360px; ">
+            <h1 class="text-black loginHead">Login</h1>
+            <form action="@Url.Content("~/Home/SigninAdmin")" method="post" style="margin: 20px 5px;">
+                <input style="outline: none; border-radius: 5px; padding: 5px 7px; font-size: 1rem; display: block; margin: 0px 5px;" name="userName" type="text" placeholder="Username" class="rounded-2 d-inline-block" required />
+                <label style="margin: 0px 20px;color: red;"></label>
+                <input style="outline: none; border-radius: 5px; padding: 5px 7px; font-size: 1rem; display: block; margin: 0px 5px; margin-bottom: 7px;" type="password" placeholder="Password" name="loginPassword" id="loginPasswordAdmin" class="rounded-2 d-inline-block inputLogin" autocomplete="on" required />
+                <div class="d-flex w-100 justify-content-center">
+                    <input type="checkbox" onclick="showHidePassword('loginPasswordAdmin')">Show Password
+                    <label style="margin: 0px 20px;color: red;">@ViewBag.wrongPasswordAdmin</label>
+                </div>
+
+                <button style="font-size: 1rem; padding: 5px 10px; display: block; margin: 15px auto; background: black; color: white; border-radius: 5px;" type="submit" class="btn btn-secondary btnAdminLogin">Login</button>
+            </form>
+        </div>
+    </div>
+    <script src="~/Scripts/index.js"></script>
+   
+</body>
+</html>

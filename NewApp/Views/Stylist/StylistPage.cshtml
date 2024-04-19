@@ -1,0 +1,84 @@
+﻿@model NewApp.Models.StylistServiceList
+@{
+    Layout = "~/Views/Shared/_LayoutLoginCustomer.cshtml";
+}
+@if (@Session["uname"].ToString() == null)
+{
+    Response.Redirect("~/Views/Home/Index.cshtml");
+}
+else
+{
+    <main>
+        <section>
+            <div class="mt-3 container body-content" style="border-bottom: 1px solid #eeeeee;">
+                <img src="@Model.backgroundImg" class="backgroundImage" />
+                <div>
+                    <form class="d-flex align-items-center" method="post" action="@Url.Content("~/Stylist/ChangeBgImage")">
+                        <div class="d-flex flex-column">
+                            <input type="number" value="@Session["stylistId"].ToString()" name="stylistkey" hidden />
+                            <label for="changeBgImage">Change Profile Picture</label>
+                            <input type="file" id="changeBgImage" name="uploadBgImage" required accept="image/*" />
+                            <label id="bgSizeError" style="color:red;"></label>
+                            <textarea name="newBackgroundImage" id="bgImageStore" hidden></textarea>
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary" type="submit">Submit</button>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+                <div style=" display: flex; align-items: center; margin: 24px 0px;">
+                    <h1 style="">@Model.stylistName</h1>
+                    <div style="margin: 10px 72px;">@Model.rating<span>&nbsp;&bigstar;</span></div>
+                </div>
+
+                <div style=" margin: 15px 0px;">
+                    <h3>Services</h3>
+                    @foreach (var element in Model.ListOfServices)
+                    {
+                        <div class="serviceList" style="margin: 5px 0px; border-bottom: 1px solid #eeeeee; ">
+                            <div class="serviceDetails" style="display: flex; width: 30vw; justify-content: space-between; padding: 3px 0px; align-items: center;">
+                                <h6 class="serviceName">@element.ServiceName</h6>
+                                <span class="ServicePrice">@element.Price</span>
+                                <span class="">@element.StatusName</span>
+                                <form action="@Url.Content("~/Stylist/RemoveService")" method="post">
+                                    <input name="serviceId" value="@element.ServiceID" hidden />
+                                    <button type="submit" class="btn btn-secondary btnHover" style="background: transparent; border-radius: 30px; color:black;">
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="description">@element.Description</div>
+                        </div>
+                    }
+                    <div>
+                        <div id="addServiceDetailsContainer" class="serviceList" style="margin: 5px 0px; border-bottom: 1px solid #eeeeee; display:none; ">
+                            <form id="addService" action="@Url.Content("~/Stylist/AddService")" method="post">
+                                @*onsubmit="bringAddServiceBtn()"*@
+                                <div class="serviceDetails" style="display: flex; width: 30vw; justify-content: space-between; padding: 3px 0px; align-items: center;">
+                                    @*<h6 class="serviceName">@element.ServiceName</h6>*@
+
+                                    <input style=" outline: none; border-radius: 5px;" type="text" class="serviceName" placeholder="Service" name="serviceName" required />
+                                    <input style=" outline: none; border-radius: 5px;" type="number" placeholder="Price(CAD)" name="Price" required />
+                                    <input type="number" value="@Session["stylistId"].ToString()" name="stylistkey" hidden />
+                                    @*<span class="ServicePrice">@element.Price</span>*@
+
+                                    <button id="btnNewServiceSubmit" type="submit" class="btn btn-secondary btnHover" style="background: transparent; border-radius: 30px;color:black;">
+                                        Add
+                                    </button>
+
+                                </div>
+                                <div class="description"><textarea form="addService" maxlength="290" name="description" placeholder="Service Description" style="width: 310px; background: rgb(247 247 247); max-width: 311px;"></textarea></div>
+                            </form>
+                        </div>
+                            <button class="btn btn-secondary" id="btnAddNewService">Add Service</button>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+}
+
+

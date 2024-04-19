@@ -1,0 +1,183 @@
+﻿body {
+    overflow-x: hidden;
+}
+
+#section1 {
+    background-color:#000000;
+}
+
+#loginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 85px 0px;
+    height:90vh;
+    position:relative;
+}
+.btnLog {
+    background-color:transparent;
+    font-size: 1.4rem;
+    border-radius: 19px;
+    padding: 6px 18px;
+    font-weight: 400;
+    border:2px solid white
+}
+
+#loginImg {
+/*    display:block;*/
+    width: 30vw;
+    border-radius: 30px;
+    position:absolute;
+    left:40vw;
+    top:15vh;
+}
+
+#loginSection,#signUpSection {
+    width: 40vw;
+/*    height:70vh;*/
+    background-color: white;
+    border-radius: 15px;
+    position:absolute;
+    left:100vw;
+    padding-bottom:50px;
+}
+
+/*animation Class for slide in */
+.animateSlideIn {
+    animation: slideIn 1s forwards;
+  
+}
+@keyframes slideIn{
+    from{left:100vw;
+        display:none;
+    }
+    to{
+        left:40vw;
+        display:block !important;
+    }
+}
+
+/*animation class for slideout*/
+.animateSlideOut{
+    animation:slideOut 1s forwards;
+}
+@keyframes slideOut{
+    from{left:40vw;
+         display:block;
+    }
+    to{
+        left:-150vw;
+        display:none !important;
+    }
+
+}
+
+
+.loginHead{
+    text-align:center;
+    margin: 8vh 0px;
+}
+#loginHair{
+    padding-right:25px;
+    padding-left:25px;
+}
+.inputLogin {
+    display: block !important;
+    width: 30vw;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 1.1rem;
+    margin:10px auto !important;
+
+}
+
+.loginCenterCont {
+    display:none;
+    width: 58%;
+    margin: 15px auto !important;
+
+}
+
+.loginSignForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#forgotPswrdStylist,#forgotPswrdCustomer{
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+    font-size: 1.1rem;
+}
+
+ #forgotPswrdStylist:hover,#forgotPswrdCustomer:hover {
+        background-color: #00000026
+    }
+
+#forgotContainer{
+    display:none;
+}
+
+#backForgotIconStylist, #backForgotIconCustomer {
+    width: 26px;
+    height: 25px;
+}
+
+    #backForgotIconStylist:hover, #backForgotIconCustomer:hover {
+        color: #605b5b;
+    }
+
+.SignUpForm {
+    display: flex;
+/*    flex-wrap: wrap;*/
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.SignUpCenterCont {
+    width: 95%;
+    margin: 15px auto !important;
+}
+.input2InRow {
+    width: 37%;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 1.1rem;
+    margin: 10px !important;
+}
+
+.addressContainer {
+    display: flex;
+    /*    flex-wrap: wrap;*/
+    justify-content: space-between;
+}
+.input3InRow {
+    width: 25%;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 1.1rem;
+    margin: 10px !important;
+}
+
+/*section 2 CSS*/
+.section2Img {
+    background-color: #da680373;
+    width: 28vw;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.section2GetStarted {
+    text-decoration: none;
+    color: white;
+    background: black;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 35px;
+    font-size: 1.4rem;
+}

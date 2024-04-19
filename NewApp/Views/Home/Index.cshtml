@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    <link  rel="stylesheet" href="~/Content/css/index.css"/>
+}
+
+<main>
+    <section class="section vw-100" id="section1">
+        <div class="mt-0 container body-content vh-100" id="loginContainer">
+            @*buttons to bring in login and signup option*@
+            <div id="loginSignup" class="d-flex flex-row">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle btnLog m-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item btnLoginSection" href="#">Hair Stylist</button>
+                        <button class="dropdown-item btnLoginSection" href="#">Customer</button>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle btnLog m-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false">
+                        Signup
+                    </button>
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item" href="#" id="btnSignUpStylist">Hair Stylist</button>
+                        <button class="dropdown-item" href="#" id="btnSignUpCustomer">Customer</button>
+                    </div>
+                </div>
+            </div>
+            @*login form for  hair stylist*@
+            <div id="loginSection" class="@ViewBag.SlideInClass">
+               
+                <div class="loginCenterCont" id="loginBlockStylist" style="display:@ViewBag.loginStylistDisplay;">
+                    <h3 class="text-black loginHead">Login (Stylist)</h3>
+
+                    <form action="@Url.Content("~/Home/SigninStylist")" method="post" class="loginSignForm" id="loginCustomerForm">
+
+                        @*@using (Html.BeginForm())*@
+                        @*{*@
+                        <input name="userName" type="text" placeholder="Username" class="rounded-2 d-inline-block inputLogin" required />
+                        <label style="margin: 0px 20px;color: red;"></label>
+                        <input type="password" placeholder="Password" name="loginPassword" id="loginPasswordStylist" class="rounded-2 d-inline-block inputLogin" autocomplete="on" required />
+                        <div class="d-flex w-100 justify-content-center">
+                            <input type="checkbox" onclick="showHidePassword('loginPasswordStylist')">Show Password
+                            <label style="margin: 0px 20px;color: red;">@ViewBag.wrongPasswordStylist</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Login</button>
+                        @*}*@
+                    </form>
+                    <div class="d-flex vw-30 justify-content-end">
+                        <button id="forgotPswrdStylist">Forgot Password</button>
+                    </div>
+                </div>
+@*loginblock for customer*@
+                <div class="loginCenterCont" id="loginBlockCustomer" style="display:@ViewBag.loginCustomerDisplay;">
+                    <h3 class="text-black loginHead">Login (Customer)</h3>
+                  
+                    <form action="@Url.Content("~/Home/SigninCustomer")" method="post" class="loginSignForm" >
+                        
+                        @*@using (Html.BeginForm())*@
+                        @*{*@
+                        <input name="userName" type="text" placeholder="Username" class="rounded-2 d-inline-block inputLogin" required />
+                        <label style="margin: 0px 20px;color: red;" id="loginEmailError"></label>
+                        <input type="password" placeholder="Password" name="loginPassword" id="loginPasswordCustomer" class="rounded-2 d-inline-block inputLogin" autocomplete="on" required />
+                        <div class="d-flex w-100 justify-content-center">
+                            <input type="checkbox" onclick="showHidePassword('loginPasswordCustomer')">Show Password
+                            <label style="margin: 0px 20px;color: red;" >@ViewBag.wrongPasswordCustomer</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Login</button>
+                        @*}*@
+                    </form>
+                    <div class="d-flex vw-30 justify-content-end">
+                        <button id="forgotPswrdCustomer">Forgot Password</button>
+                    </div>
+                </div>
+                
+@* Container for forgot password for stylist*@
+            <div class="loginCenterCont" id="forgotContainerStylist" >
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="backForgotIconStylist" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                    </svg>
+                </div>
+                <h3 class="text-black loginHead">Forgot Password</h3>
+                <form method="post" class="forgotPasswordForm">
+                    <input type="email" placeholder="Email" class="rounded-2 d-inline-block inputLogin" required />
+                    <label style="margin: 0px 20px;color: red;" ></label>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Recover Password</button>
+                    </div>
+                    <button type="submit" class="btn btn-secondary m-2 btnLog bg-black float-end d-none">Resend OTP</button>
+                </form>
+            </div> 
+@*forgot container for customer*@
+                <div class="loginCenterCont" id="forgotContainerCustomer">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="backForgotIconCustomer" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                    </svg>
+                </div>
+                <h3 class="text-black loginHead">Forgot Password</h3>
+                <form method="post" class="forgotPasswordForm">
+                    <input type="email" placeholder="Email" class="rounded-2 d-inline-block inputLogin" required />
+                    <label style="margin: 0px 20px;color: red;" ></label>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Recover Password</button>
+                    </div>
+                    <button type="submit" class="btn btn-secondary m-2 btnLog bg-black float-end d-none" >Resend OTP</button>
+                </form>
+            </div> 
+            </div>
+
+            @*sign up form for customer and stylist*@
+            <div id="signUpSection" class="@ViewBag.SlideInCustSignUp">
+
+                <div class="SignUpCenterCont" id="signUpCustomer" style="display:@ViewBag.displayCustSignUp;">
+                    <h3 class="text-black loginHead m-4">Sign Up (Customer)</h3>
+                    <form action="@Url.Content("~/Home/Signup_cust")" method="post" class="SignUpForm" onsubmit="return validateSignUpCustomer()">
+                        <div class="d-flex flex-row w-100 align-items-start justify-content-between">
+                            <input name="fullName" type="text" placeholder="Name" class="rounded-2 d-inline-block input2InRow" required />
+                            <div class="d-flex flex-column" style="width:37%; margin:0px 10px;">
+                                <input name ="email" type="email" placeholder="Email" class="rounded-2 d-inline-block input2InRow" style="width: 95%;" required />
+                                <label id="signCustomerEmailError" class="text-danger">@ViewBag.custEmailError</label>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row w-100 align-items-start justify-content-between">
+                            <div class="d-flex flex-column">
+                                <input name="password" type="password" placeholder="Password" id="signCustomerPswrd" class="rounded-2 d-inline-block input2InRow" autocomplete="on" required style=" width: 92% !important;" />
+                                <div class="d-flex justify-content-center">
+                                    <input type="checkbox" onclick="showHidePassword('signCustomerPswrd')">Show Password
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center" style="width: 47%;">
+
+                                <input name="countryCode" type="text" value="CA" style="width:40px;height:40px;outline:none;border-radius:5px;border:none;" class="bg-secondary text-white m-1" readonly />
+                                <input type="tel" class="rounded-2 d-inline-block input2InRow w-100 phoneNumber" name="phoneNumber" id="customerPhoneNumber" placeholder="Phone Number" maxlength="10" title="Ten digits code" required />
+                            </div>
+
+                        </div>
+                        <div class="d-flex w-100 m-2 flex-column">
+                            <input name="customerUserName" type="text" id="customerUserName" class="rounded-2 d-inline-block input2InRow" placeholder="User Name" required>
+                            <label id="customerUserNameError" class="text-danger">@ViewBag.custUserNameError</label>
+                        </div>
+
+                        <div class="addressContainer">
+                            <input name="stNumber" type="text" placeholder="Street No." class="rounded-2 d-inline-block input3InRow" required />
+                            <input name="city" type="text" placeholder="City" class="rounded-2 d-inline-block input3InRow" required />
+                            <input name="zipCode" type="text" placeholder="Zip Code" class="rounded-2 d-inline-block input3InRow" required />
+
+                        </div>
+                        <div class="d-flex flex-row w-100 align-items-center justify-content-between">
+                            <input name="state" type="text" placeholder="State" class="rounded-2 d-inline-block input3InRow" required />
+                            <input name="country" type="text" placeholder="Country" class="rounded-2 d-inline-block input3InRow" required />
+                        </div>
+                        <div class="w-100" style="text-align:center;margin:15px;">
+                            <input type="checkbox" required id="termsCheckboxCustomer" >I agree to the <a style="color:black;" href="">terms and conditions</a>
+                        </div>
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Register</button>
+                    </form> 
+                </div>
+
+                    <div class="SignUpCenterCont" id="signUpStylist" style="display:@ViewBag.displayStylistSignUp;">
+                    <h3 class="text-black loginHead m-4">Sign Up (Stylist)</h3>
+                    <form action="@Url.Content("~/Home/Signup_stylist")" method="post" class="SignUpForm" id="customerSignupForm"  onsubmit="return validateSignUpStylist()" enctype="multipart/form-data">
+                       
+                        <div class="d-flex flex-row w-100 align-items-start justify-content-between">
+                            <input type="text" name="fullname" placeholder="Fullname" class="rounded-2 d-inline-block input2InRow" required />
+                            <div class="d-flex flex-column" style="width:37%; margin:0px 10px;">
+                                <input type="email" name="email" placeholder="Email" class="rounded-2 d-inline-block input2InRow" style="width:95%;" required />
+                                <label id="signStylistEmailError" class="text-danger">@ViewBag.stylEmailError</label>
+                            </div>
+
+                        </div>
+                        <div class="d-flex flex-row w-100 align-items-start justify-content-between">
+                            <div class="d-flex flex-column">
+                                <input type="password" name="password" placeholder="Password" id="signStylistPswrd" class="rounded-2 d-inline-block input2InRow" autocomplete="on" required style=" width: 92% !important;" />
+                                <div class="d-flex justify-content-center">
+
+                                    <input type="checkbox" onclick="showHidePassword('signStylistPswrd')">Show Password
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center" style="width: 47%;">
+
+                                <input type="text" value="CA" style="width:40px;height:40px;outline:none;border-radius:5px;border:none;" class="bg-secondary text-white m-1" readonly />
+                                <input type="tel" class="rounded-2 d-inline-block input2InRow w-100 phoneNumber" name="phoneNumber" id="stylistPhoneNumber" placeholder="Phone Number" maxlength="10" title="Ten digits code" required />
+                            </div>
+                        </div>
+                        <div class="d-flex w-100  flex-row align-items-start justify-content-between">
+                            <input type="text" name="address" placeholder="Address" class="rounded-2 d-inline-block input2InRow" required />
+                            <div class="d-flex flex-column" style="width:37%; margin:0px 10px;">
+                                <input type="text" id="stylistUserName" name="stylistUserName" class="rounded-2 d-inline-block input2InRow" style="width:95%;" placeholder="User Name" required>
+                                <label id="StylistUserNameError" class="text-danger">@ViewBag.stylUserNameError</label>
+                            </div>
+
+                        </div>
+
+                        <div class="addressContainer flex-column w-100 m-2" style="padding-left:15px;">
+                            <label for="certificateFile" style="font-size:1.1rem">Upload Certificate of Qualification: (File Size shouldn't exceed 5MB)</label>
+                            <input type="file" class="file-input" id="certificateFile" name="certificateStylist" required accept="image/*,.pdf">
+                            <label id="certificateError" class="text-danger"></label>
+                            @*<input type="text" name="stylistCertificate"  hidden>*@
+                            <textarea name="stylistCertificate" id="stylistCertificate" style="display:none;" hidden></textarea>
+                          
+                        </div>
+                        <div class="d-flex flex-column w-100 m-2" style="padding-left:15px;">
+                            <label for="criminalCheckFile" style="font-size:1.1rem">Upload Criminal Record Check: (File Size shouldn't exceed 5MB)</label>
+                            <input type="file" class="file-input" id="criminalCheckFile" name="criminalCheckStylist" required>
+                            <label id="criminalCheckError" class="text-danger"></label>
+                            @*<input type="text" name="stylistCriminalCheck" id="stylistCriminalCheck" style="display:none;" hidden>*@
+                            <textarea name="stylistCriminalCheck" id="stylistCriminalCheck" style="display:none;" hidden></textarea>
+                        </div>
+                        <div class="w-100" style="text-align:center;margin:15px;">
+                            <input type="checkbox" required id="termsCheckboxStylist">I agree to the <a style="color:black;" href="">terms and conditions</a>
+                        </div>
+                        <button type="submit" class="btn btn-secondary m-2 btnLog bg-black">Register</button>
+                    </form>
+                </div>
+
+            </div>
+            <img id="loginImg" class="@ViewBag.SlideOutClass" src="~/Content/img/index/hairdresser.png" alt="error"/>
+        </div>
+    </section>
+
+    <section class="section vw-100 vh-100 section2">
+        <div class="mt-3 container body-content d-flex justify-content-evenly align-items-center" style="padding: 85px 0px; height: 90vh;">
+            <div class="section2Img">
+                <img style="width: 14vw;" class="" src="~/Content/img/index/LadyStlylist.png" alt="error" />
+            </div> 
+            <div style="width:30vw;">
+                <h1 style="font-weight: bold; font-size: 3rem;">Work when you want, make what you need</h1>
+                <div class="d-flex"><a href="#loginContainer" class="section2GetStarted">Get Started</a></div>
+            </div>
+        </div>
+
+    </section>
+</main>

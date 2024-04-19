@@ -1,0 +1,37 @@
+﻿@model List<NewApp.Models.StylistList>
+@*@model NewApp.Models.StylistList*@
+@{
+    Layout = "~/Views/Shared/_LayoutLoginCustomer.cshtml";
+}
+@if (@Session["uname"].ToString() == null)
+{
+    Response.Redirect("~/Views/Home/Index.cshtml");
+}
+else
+{
+
+
+    <main>
+        <section class="section">
+            <div class="text-center d-none" style="padding:10px; background:#eeeeee;font-weight:bold;display:@ViewBag.paymentStatusDisplay;">
+                @ViewBag.SuccessCustomerReference
+            </div>
+            <div class="mt-3 container body-content d-flex flex-wrap align-items-center" style="border-bottom: 1px solid #eeeeee;">
+                @foreach (var stylist in Model)
+                {
+                    @*@stylist.backgroundImg*@
+                    <div class="cardContainer">
+                        <a href="@Url.Action("StylistServices", "LoginCustomer", new { stylistKey = @stylist.stylistId, rating = @stylist.Rating,stylistName = @stylist.StylistName  })" class="cardLink">
+                            <img src="@stylist.backgroundImg" class="cardImg" alt="something went wrong" />
+                            <h4 class="cardHeading">@stylist.StylistName</h4>
+                            <div class="cardRating"><span id="cardRatingValue">@stylist.Rating</span>&nbsp;&bigstar;</div>
+                        </a>
+                    </div>
+                }
+
+            </div>
+        </section>
+
+    </main>
+}
+

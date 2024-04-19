@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - RoamingRazors</title>
+    <link rel="stylesheet" href="~/Content/css/layout.css" />
+    <link rel="stylesheet" href="~/Content/css/loginCustomer.css" />
+    <link rel="stylesheet" href="~/Content/css/customer.css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-white" id="navStart" style="border-bottom: 1px solid #eeeeee;">
+        <div class="container" style="min-width: 95vw !important;">
+            @if (!Session["user"].Equals("admin"))
+            {
+                <button id="btnToggleCustomer" onclick="openProfileSection()">
+                    <span class="navbar-toggler-icon" style="filter:invert(1);"></span>
+                </button>
+            }
+            <div class="d-flex align-items-center">
+                <img src="~/Content/img/logo.png" alt="error" id="logo" />
+                @Html.ActionLink("RoamingRazors", "Index", "Home", new { @class = "navbar-brand brandLogo text-black fw-bold" })
+                @*new { area = "" }*@
+            </div>
+            @if (!Session["user"].Equals("admin"))
+            {
+                <div class="d-flex align-items-center navAddressContainer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <form>
+                        <input type="text" class="navCustomerInputs" value="@Session["Address"].ToString()" />
+                    </form>
+                </div>
+            }
+                @if (Session["user"].Equals("customer"))
+                {
+                    <div class="searchStylistContainer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                        <form style="width:95%;">
+                            <input type="search" class="navSearchInput" placeholder="" />
+                        </form>
+
+                    </div>
+                    <div class="bg-black d-flex align-items-center" style=" border-radius: 15px; padding: 6px 10px; cursor:pointer;" onclick="openCartDisplay()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart customerCart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                        </svg>
+                        <div class="numberOfCarts">
+                            <label id="orderNumberLabel">0</label>
+                            <label>&nbsp;carts</label>
+                        </div>
+
+
+                    </div>}
+                else if (Session["user"].Equals("stylist"))
+                {
+                    bool isChecked = ViewBag.visibilityResult;
+                    <div>
+                        <form action="@Url.Content("~/Stylist/ChangeVisibility")" method="post" id="stylistSwitchForm">
+                            <div class="form-check form-switch">
+                                @if (isChecked)
+                                {
+                                    <input class="form-check-input" type="checkbox" style="accent-color:orange;" id="flexSwitchCheckDefault" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" style="accent-color:orange;" id="flexSwitchCheckDefault" />
+                                }
+
+
+                                <input type="number" value="@Session["stylistId"].ToString()" name="stylistkey" hidden />
+
+                                <input type="number" id="switchStylistValue" name="switchStylistValue" hidden />
+
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Visibility</label>
+                            </div>
+                        </form>
+                    </div>
+
+                }
+                else if (Session["user"].Equals("admin")) { 
+                <div>
+                        <form method="post" { action="@Url.Content("~/Admin/Signout")" }>
+                            <button class="btn btn-secondary" type="submit">Sign Out</button>
+                        </form>
+                    
+                </div>
+                }
+
+            </div>
+        @*aside container to display profile and cart*@
+        @if (!Session["user"].Equals("admin"))
+        {
+        <div id="customerProfileContainer">
+            <div class="h-100 bg-white" style="width:20%;" id="customerProfileDisplay">
+                <div class="w-100">
+                    <button type="button" class="close float-end rounded-1" aria-label="Close" onclick="closeProfileSection()" style=" outline: none; border: none;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @*name show container*@
+                <div class="d-flex align-items-center w-100 justify-content-center" style="padding: 3px; border-bottom: 2px solid #eeeeee;">
+                    <div style="background: #eeeeee; margin: 10px; border-radius: 35px !important; padding: 3px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </div>
+                    <div class="d-flex flex-column" style="font-size: 1rem; margin: 15px;">
+                        <label class="customerName" style="font-size:1.2rem;">@Session["Fullname"].ToString()</label>
+                        @*<a href="">Manage Account</a>*@
+                    </div>
+                </div>
+                @*personal info and options container*@
+            <div class="d-flex flex-column align-items-center w-100 justify-content-center" style="padding: 3px; padding-bottom: 40px; margin: 40px 0px; border-bottom: 2px solid #eeeeee; ">
+                <ul class="d-flex flex-column" style=" list-style: none; width: 99%;justify-content: left;">
+                    <li>
+                        <button class="btnDisplayContainer">
+                            Account Info<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btnDisplayContainer">
+                            Security<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btnDisplayContainer">
+                            Payments<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btnDisplayContainer">
+                            Activity<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btnDisplayContainer">
+                            Help<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </button>
+                    </li>
+
+                </ul>
+                <div id="accountInfoContainer" class="customerInfoDisplayLayout">
+                    <div class="w-100">
+                        <button type="button" class="close float-end rounded-1 closecustomerInfoDisplayLayout" aria-label="Close" style=" outline: none; border: none;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h1 style=" margin: 20px 20px; text-align: center; font-size: 2.3rem; font-weight: bold;">Account Info</h1>
+                    <div class="accountInfoSubContainer">
+                        <h2 style="margin-bottom: 20px;">Basic Info</h2>
+                        <div class="d-flex flex-column" style="margin: 10px 0px; border-bottom: 2px solid #eeeeee;">
+                            <label>Name</label>
+                            @*<input type="text" value="Manjinder Singh" readonly />*@
+                            <label class="customerName">@Session["Fullname"].ToString()</label>
+                        </div>
+                        <div class="d-flex flex-column" style="margin: 10px 0px; border-bottom: 2px solid #eeeeee;">
+                            <label>Email</label>
+                            <label class="customerEmail">@Session["Email"].ToString()</label>
+
+                        </div>
+                        <div style="margin: 10px 0px; border-bottom: 2px solid #eeeeee;" class="d-flex flex-column">
+                            <form name="phoneChange">
+                                <label>Phone Number</label>
+                                <div class="d-flex">
+                                    <input type="text" value="CA" style="width:40px;outline:none;border-radius:5px;border:none;" class="bg-secondary text-white m-1" readonly />
+                                    <input type="tel" class="m-1" name="telphoneChange" id="telCustomerChange" value="@Session["PhoneNumber"].ToString()" placeholder="888 888 8888" maxlength="10" title="Ten digits code" required />
+                                    <button type="submit" class="btn btn-secondary m-1">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="customerInfoDisplayLayout">
+                    <div class="w-100">
+                        <button type="button" class="close float-end rounded-1 closecustomerInfoDisplayLayout" aria-label="Close" style=" outline: none; border: none;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h1 style=" margin: 20px 20px; text-align: center; font-size: 2.3rem; font-weight: bold;">Change Password</h1>
+                    <div class="accountInfoSubContainer">
+                        @*change customer password form*@
+                        <form method="post" onsubmit="return validateConfirmPassword()">
+                            <div class="d-flex flex-column" style="padding-bottom:10px;margin: 10px 0px; border-bottom: 2px solid #eeeeee;">
+                                <label class="inputLabel" for="newPassword">New Password</label>
+                                <input type="password" class="rounded-1" style="outline:none;" id="newPassword" onkeyup='validateConfirmPassword();' name="password" autocomplete="on" required>
+                            </div>
+
+                            <div class="d-flex flex-column" style="padding-bottom: 10px; margin: 10px 0px; border-bottom: 2px solid #eeeeee;">
+                                <label class="inputLabel" for="confirmPassword">Confirm Password</label>
+                                <input type="password" class="rounded-1" style="outline:none;" id="confirmPassword" onkeyup='validateConfirmPassword();' autocomplete="on" name="confirmPassword">
+                                <span id='wrongPasswordMessage'></span>
+                            </div>
+                            <button type="submit" class="btn btn-secondary m-1">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                @*Payments display container*@
+                <!--<div class="customerInfoDisplayLayout">
+        <div class="w-100">
+            <button type="button" class="close float-end rounded-1 closecustomerInfoDisplayLayout" aria-label="Close" style=" outline: none; border: none;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div onclick="openCloseCardSection()" class="cardSubContainer bg-secondary text-white">Add Credit/Debit Card</div>
+        <form class="credit-card">
+            <div class="form-header">
+                <h4 class="title">Credit/Debit card detail</h4>
+            </div>
+
+            <div class="form-body">
+                <input type="text" class="card-number" placeholder="Name of the Cardholder">
+                <!-- Card Number -->
+                <!--<input type="text" class="card-number" placeholder="Card Number">-->
+                <!-- Date Field -->
+                <!--<div class="date-field">
+        <div class="month">
+            <select name="Month">
+                <option disabled selected hidden value="">Expiry Month</option>
+                <option value="january">January</option>
+                <option value="february">February</option>
+                <option value="march">March</option>
+                <option value="april">April</option>
+                <option value="may">May</option>
+                <option value="june">June</option>
+                <option value="july">July</option>
+                <option value="august">August</option>
+                <option value="september">September</option>
+                <option value="october">October</option>
+                <option value="november">November</option>
+                <option value="december">December</option>
+            </select>
+        </div>
+        <div class="year">
+            <select name="Year">
+                <option disabled selected hidden value="">Expiry Year</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+            </select>
+        </div>
+    </div>-->
+                <!-- Card Verification Field -->
+                <!--<div class="card-verification">
+        <div class="cvv-input">
+            <input type="password" maxlength="4" placeholder="CVV">
+        </div>
+        <div class="cvv-details">
+            <p>3 or 4 digits usually found <br> on the signature strip</p>
+        </div>
+    </div>-->
+                <!-- Buttons -->
+                <!--<button type="submit" class="proceed-btn">Proceed</button>-->
+                @*<button type="submit" class="paypal-btn"><a href="#">Pay With</a></button>*@
+                @*</div>
+            </form>
+            <div class="cardSubContainer bg-secondary text-white d-flex flex-column">
+                <div>
+                    <span>Visa</span> ending with ****<span>3019</span>
+                </div>
+                <div>
+                    <span style="font-size:1rem;">Expires in <span>2026</span></span>
+                    <button class="btn btn-sm text-white border-white float-end">Remove</button>
+                </div>
+            </div>
+        </div>
+                *@
+            </div>
+                @*signout*@
+                <div class="w-100 d-flex justify-content-center align-items-center">
+                    @if (Session["user"].Equals("customer"))
+                    {
+                        <form method="post" { action="@Url.Content("~/LoginCustomer/Signout")" }>
+                            <button type="submit" id="btnCustomerSignOut">Sign Out</button>
+                        </form>
+                    }
+                    else if (Session["user"].Equals("stylist"))
+                    {
+                <form method="post" { action="@Url.Content("~/Stylist/Signout")" }>
+                    <button type="submit" id="btnCustomerSignOut">Sign Out</button>
+                </form>
+                    }
+                </div>
+            </div>
+            
+        </div>
+        <div id="customerCartContainer">
+            @*cart aside container*@
+            <div class="h-100 bg-white" style="width:25%;" id="customerCartDisplay">
+                <div class="w-100">
+                    <button type="button" class="close float-start rounded-1" aria-label="Close" onclick="closeCartDisplay()" style=" outline: none; border: none;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="d-flex flex-column align-items-center w-100 justify-content-center" style="padding: 3px; padding-bottom: 40px; margin: 40px 0px; border-bottom: 2px solid #eeeeee; ">
+                    <ul class="d-flex flex-column" id="StylistCartList" style=" list-style: none; width: 99%; justify-content: left; padding-left: 5px !important; padding-top: 10px; border-top: 2px solid #eeeeee;">
+                       
+                    </ul>
+                </div>
+        </div>
+            </div>}
+
+</nav>
+    @*<hr style=" margin: 0px; color: inherit; border: 0; border-top: 1px solid; opacity: 0.25;" />*@
+    
+        @RenderBody()
+   
+    <script src="~/Scripts/CustomerScript/layoutCustomer.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

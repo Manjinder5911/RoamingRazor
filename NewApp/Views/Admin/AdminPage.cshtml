@@ -1,0 +1,120 @@
+﻿@model NewApp.Models.AdminApprovalRequests
+
+@{
+    Layout = "~/Views/Shared/_LayoutLoginCustomer.cshtml";
+}
+@if (@Session["uname"].ToString() == null)
+{
+    Response.Redirect("~/Views/Home/Index.cshtml");
+}
+else
+{
+    <main>
+        <section>
+            <div class="mt-3 container body-content" style="border-bottom: 1px solid #eeeeee;">
+                @*//container for stylist*@
+                <div style=" margin: 15px 0px;">
+                    <h3>Stylists (Pending Requests)</h3>
+                    @foreach (var element in Model.ListOfStylist)
+                    {
+                        <div style="margin: 15px 0px; border-bottom: 1px solid #eeeeee; ">
+                            <div style="display: flex; width: 50vw; justify-content: space-between; padding: 3px 0px; align-items: center;">
+                                <h6 class="serviceName">@element.StylistName</h6>
+                                <span class="StylistQualification">
+                                    <a href="@element.QualificationCertificate" class="link-secondary" target="_blank">Qualification</a>
+                                </span>
+                                <span class="StylistBackgroundCheck">
+                                    <a href="@element.BackgroundCheck" class="link-secondary" target="_blank">Background Check</a>
+                                </span>
+                                <form action="@Url.Content("~/Admin/ApproveStylist")" method="post">
+                                    <input name="StylistId" value="@element.StylistId" hidden />
+                                    <button type="submit" class="btn btn-success approveBtn">
+                                        Approve
+                                    </button>
+                                </form>
+                                <form action="@Url.Content("~/Admin/RejectStylist")" method="post">
+                                    <input name="StylistId" value="@element.StylistId" hidden />
+                                    <button type="submit" class="btn btn-danger rejectBtn">
+                                        Reject
+                                    </button>
+                                </form>
+                            </div>
+                            @*<div class="description">@element.Description</div>*@
+                        </div>
+                    }
+                </div>
+
+                <div style=" margin: 15px 0px;">
+                    <h3>Services (Pending Requests)</h3>
+                    @foreach (var element in Model.ListOfServices)
+                    {
+                        <div style="margin: 15px 0px; border-bottom: 1px solid #eeeeee; ">
+                            <div style="display: flex; width: 50vw; justify-content: space-between; padding: 3px 0px; align-items: center;">
+                                <h6 class="stylistName">@element.StylistName</h6>
+                                <h6 class="serviceName">@element.ServiceName</h6>
+                                <span class="ServicePrice">@element.Price</span>
+
+                                <form action="@Url.Content("~/Admin/ApproveService")" method="post">
+                                    <input name="serviceId" value="@element.ServiceId" hidden />
+                                    <button type="submit" class="btn btn-success approveBtn">
+                                        Approve
+                                    </button>
+                                </form>
+                                <form action="@Url.Content("~/Admin/RejectService")" method="post">
+                                    <input name="serviceId" value="@element.ServiceId" hidden />
+                                    <button type="submit" class="btn btn-danger rejectBtn">
+                                        Reject
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="description">@element.Description</div>
+                        </div>
+                    }
+                </div>
+                <div style="margin: 15px 0px;">
+                    <h3>Transactions</h3>
+                    <div style="height:70vh;overflow:scroll;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Order ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Stylist Name</th>
+                                    <th>Transaction Successful</th>
+                                    <th>Transaction Amount</th>
+                                    <th>Stylist Amount</th>
+                                    <th>Company Amount</th>
+                                    <th>Date Time</th>
+                                    <th>Customer Reference ID</th>
+                                    <th>PayPal Transaction ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var element in Model.ListOfTransaction)
+                                {
+                                    <tr>
+                                        <td>@element.TransactionId</td>
+                                        <td>@element.OrderId</td>
+                                        <td>@element.CustomerName</td>
+                                        <td>@element.StylistName</td>
+                                        <td>@element.TransactionSuccessfull</td>
+                                        <td>$&nbsp;@element.TransactionAmount</td>
+                                        <td>$&nbsp;@element.StylistAmount</td>
+                                        <td>$&nbsp;@element.CompanyAmount</td>
+                                        <td>@element.TransactionDate</td>
+                                        <td>@element.CustomerTransactionId</td>
+                                        <td>@element.PaypalTransactionId</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+           </div>
+</section>
+
+    </main>
+}
+
+
