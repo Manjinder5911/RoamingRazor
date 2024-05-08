@@ -2,14 +2,14 @@
 using NewApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure.Pluralization;
+//using System.Data.Entity.Infrastructure.Pluralization;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+//using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NewApp.Controllers
 {
