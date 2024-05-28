@@ -48,18 +48,17 @@ namespace NewApp.Controllers
 
         [HttpPost]
 
-        //public ActionResult Index(string userName, string loginPassword)
+      
         [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult SigninCustomer(string userName, string loginPassword)
         {
             int idnumber = 0;
-            
-            //string uname = userName.Trim();
+          
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(loginPassword))
                 {
                 string conString = null;
                 MySqlConnection con = null;
-                //conString = "server=localhost;database=roamingrazorsdb;uid=root;pwd=manjiRoot@26;";
+               
                 conString = System.Configuration.ConfigurationManager.AppSettings["ConString"];
                 con = new MySqlConnection(conString);
                 MySqlCommand cmd = con.CreateCommand();
@@ -111,7 +110,7 @@ namespace NewApp.Controllers
 
         } 
         [HttpPost]
-        //public ActionResult Index(string userName, string loginPassword)
+        
         [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult SigninStylist(string userName, string loginPassword)
         {
@@ -122,7 +121,7 @@ namespace NewApp.Controllers
                 {
                 string conString = null;
                 MySqlConnection con = null;
-                //conString = "server=localhost;database=roamingrazorsdb;uid=root;pwd=manjiRoot@26;";
+               
                 conString = System.Configuration.ConfigurationManager.AppSettings["ConString"];
                 con = new MySqlConnection(conString);
                 MySqlCommand cmd = con.CreateCommand();
@@ -146,10 +145,10 @@ namespace NewApp.Controllers
                             if (statusId != 1)
                             {
                                 return View("~/Views/Home/PendingStylistStatusPage.cshtml");
-                                //return View("../PendingStylistStatusPage");
+                               
                             }
                             
-                            //check subsc date and send for payment
+                          
                             Session["Fullname"] = reader.GetString("Full_Name");
                             Session["Address"] = reader.GetString("Address");
                             Session["Email"] = reader.GetString("Email");
@@ -281,7 +280,7 @@ namespace NewApp.Controllers
             try
             {
                 con.Open();
-                //MessageBox.show("");
+               
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -313,7 +312,7 @@ namespace NewApp.Controllers
             else
             {
                 //Throw error - username duplicate
-                //ViewBag.stylUserNameError = "Username already in use (required for login)";
+                
                 ViewBag.SlideOutClass = "animateSlideOut";
                 ViewBag.SlideInCustSignUp = "animateSlideIn";
                 ViewBag.displayCustSignUp = "none";
@@ -334,13 +333,11 @@ namespace NewApp.Controllers
         public ActionResult SigninAdmin(string userName,string loginPassword)
         {
             int idnumber = 0;
-
-            //string uname = userName.Trim();
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(loginPassword))
             {
                 string conString = null;
                 MySqlConnection con = null;
-                //conString = "server=localhost;database=roamingrazorsdb;uid=root;pwd=manjiRoot@26;";
+                
                 conString = System.Configuration.ConfigurationManager.AppSettings["ConString"];
                 con = new MySqlConnection(conString);
                 MySqlCommand cmd = con.CreateCommand();
